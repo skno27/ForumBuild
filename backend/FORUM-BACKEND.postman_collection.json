@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "6b2009c0-28a9-4850-b23e-78c7870e72d8",
+		"name": "FORUM-BACKEND",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32171338"
+	},
+	"item": [
+		{
+			"name": "GET USERS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE USER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE USER BY ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE USER BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET POSTS BY USER ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{id}}/posts",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{id}}",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET POSTS-FOLLOWED BY USER ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{id}}/posts-followed",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{id}}",
+						"posts-followed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET POSTS-LIKED BY USER ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users/{{id}}/posts-liked",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{id}}",
+						"posts-liked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET POSTS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET POST BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE POST BY ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE POST BY ID Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIKE A POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}/likes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE A POST",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}/likes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FOLLOW A POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}/follows",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}",
+						"follows"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UNFOLLOW A POST",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}/follows",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}",
+						"follows"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET POST REPLIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}/replies",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}",
+						"replies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE POST REPLY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/posts/{{id}}/replies",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{id}}",
+						"replies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET REPLY BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/replies/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"replies",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE REPLY BY ID Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/replies/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"replies",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE REPLY BY ID Copy 2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/replies/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"replies",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000"
+		}
+	]
+}
