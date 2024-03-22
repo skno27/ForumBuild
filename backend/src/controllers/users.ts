@@ -1,16 +1,22 @@
 // describes user controller
 import express, { NextFunction, Request, Response } from "express";
 import prisma from "../prisma.js";
+import { RequestHandler } from "express-serve-static-core";
 
-const getMany = async (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response) => {
   const users = await prisma.user.findMany();
   res.json({ users });
 };
 
-const create = async (req: Request, res: Response, next: NextFunction) => {
+export const createUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const user = await prisma.user.create({
       data: {
+        name: req.body.name,
         email: req.body.email,
         username: req.body.username,
       },
@@ -21,23 +27,26 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const get = async (req: Request, res: Response) => {
-  const id = Number.parseInt(req.params.id);
-  const user = await prisma.user.findFirst({
-    where: { id: id },
-    include: {
-      posts: true,
-    },
-  });
-
-  if (!user) {
-    res.status(404).json({ error: "User not found" });
-    return;
-  }
-
-  res.send(user.username);
+export const getUser = async (req: Request, res: Response) => {
+  res.json({ message: "hit" });
 };
 
-export default { getMany, create, get };
-// postman://auth/callback?code=83a9823f55406400d4f25f63abf336e2b43dbfdeb696f5d2c79a2676208a2749
-// postman://auth/callback?code=83a9823f55406400d4f25f63abf336e2b43dbfdeb696f5d2c79a2676208a2749
+export const updateUser: RequestHandler = (req, res) => {
+  res.json({ message: "hit" });
+};
+
+export const deleteUser: RequestHandler = (req, res) => {
+  res.json({ message: "hit" });
+};
+
+export const getUserPosts: RequestHandler = (req, res) => {
+  res.json({ message: "hit" });
+};
+
+export const getUserLikedPosts: RequestHandler = (req, res) => {
+  res.json({ message: "hit" });
+};
+
+export const getUserFollowedPosts: RequestHandler = (req, res) => {
+  res.json({ message: "hit" });
+};
