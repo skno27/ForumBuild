@@ -14,11 +14,13 @@ datasource db {
 }
 
 model User {
-  id                   Int                    @id @default(autoincrement())
-  email                String                 @unique
-  username             String                 @unique
-  name                 String
-  verified             Boolean                @default(true)
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  username String  @unique
+  name     String
+  verified Boolean @default(true)
+  password String
+
   notificationSettings NotificationSettings[]
   posts                Post[]
   postsLiked           Post[]                 @relation("PostLikes")

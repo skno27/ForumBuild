@@ -3,50 +3,102 @@ import express, { NextFunction, Request, Response } from "express";
 import prisma from "../prisma.js";
 import { RequestHandler } from "express-serve-static-core";
 
-export const getUsers = async (req: Request, res: Response) => {
+export const getUsers: RequestHandler = async (req, res) => {
   const users = await prisma.user.findMany();
   res.json({ users });
 };
 
-export const createUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const user = await prisma.user.create({
-      data: {
-        name: req.body.name,
-        email: req.body.email,
-        username: req.body.username,
-      },
-    });
-    res.status(201).json({ user });
-  } catch (err) {
-    next(err);
+export const createUser: RequestHandler = async (req, res) => {
+  const user = await prisma.user.create({
+    data: req.body,
+  });
+  res.status(201).json({ user });
+};
+
+export const getUser: RequestHandler = async (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+    include: {
+      posts: true,
+    },
+  });
+
+  if (!user) {
+    return next(new Error("404"));
   }
+  console.log("User Found!");
+  res.send({ user });
 };
 
-export const getUser = async (req: Request, res: Response) => {
-  res.json({ message: "hit" });
+export const updateUser: RequestHandler = async (req, res, next) => {
+  const userId = req.user.userId;
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: req.body,
+  });
+
+  if (!user) {
+    return next(new Error("404"));
+  }
+  console.log("user updated");
+  res.json(user);
 };
 
-export const updateUser: RequestHandler = (req, res) => {
-  res.json({ message: "hit" });
+export const deleteUser: RequestHandler = async (req, res) => {
+  const userId = req.user.userId;
+  const result = await prisma.user.delete({
+    where: { id: userId },
+  });
+
+  res.sendStatus(200);
+  console.log(`User ${result.username} deleted`);
 };
 
-export const deleteUser: RequestHandler = (req, res) => {
-  res.json({ message: "hit" });
+export const getUserPosts: RequestHandler = async (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+    include: {
+      posts: true,
+    },
+  });
+
+  if (!user) {
+    return next(new Error("404"));
+  }
+  console.log("User Found!");
+  res.send({ posts: user.posts });
 };
 
-export const getUserPosts: RequestHandler = (req, res) => {
-  res.json({ message: "hit" });
+export const getUserLikedPosts: RequestHandler = async (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+    include: {
+      postsLiked: true,
+    },
+  });
+
+  if (!user) {
+    return next(new Error("404"));
+  }
+  console.log("User Found!");
+  res.send({ posts: user.postsLiked });
 };
 
-export const getUserLikedPosts: RequestHandler = (req, res) => {
-  res.json({ message: "hit" });
-};
+export const getUserFollowedPosts: RequestHandler = async (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+    include: {
+      postsFollowed: true,
+    },
+  });
 
-export const getUserFollowedPosts: RequestHandler = (req, res) => {
-  res.json({ message: "hit" });
+  if (!user) {
+    return next(new Error("404"));
+  }
+  console.log("User Found!");
+  res.send({ posts: user.postsFollowed });
 };

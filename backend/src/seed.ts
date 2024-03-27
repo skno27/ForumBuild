@@ -5,9 +5,9 @@ await prisma.user.deleteMany();
 
 await prisma.user.createMany({
   data: [
-    { email: "1@email.com", username: "one" },
-    { email: "2@email.com", username: "two" },
-    { email: "3@email.com", username: "three" },
+    { name: "1", email: "1@email.com", username: "one" },
+    { name: "2", email: "2@email.com", username: "two" },
+    { name: "3", email: "3@email.com", username: "three" },
   ],
 });
 

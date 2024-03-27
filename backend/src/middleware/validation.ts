@@ -1,26 +1,36 @@
-import { Request, Response, NextFunction } from "express";
-import z from "zod";
+import { Request, Response, NextFunction, RequestHandler } from "express";
+import z, { ZodType } from "zod";
+import * as schemas from "./schemas.js";
+import { ValidationError } from "./errors.js";
 
-const UserSchema = z.object({
-  username: z
-    .string()
-    .min(5, "at least 5 characters")
-    .max(50, "at most 50 characters"),
-  email: z.string().email(),
-});
+export const validateParamId: RequestHandler = (req, res, next) => {
+  const result = z
+    .number()
+    .int()
+    .nonnegative()
+    .safeParse(parseInt(req.params.id));
 
-type User = z.infer<typeof UserSchema>;
-
-const validateAccount = (
-  req: Request<unknown, unknown, User>,
-  res: Response,
-  next: NextFunction
-) => {
-  const validation = UserSchema.safeParse(req.body);
-  if (!validation.success) {
-    return res.status(400).json({ errors: validation.error.issues });
+  if (!result.success) {
+    return next(new ValidationError(result.error.issues));
   }
   next();
 };
 
-export default { validateAccount };
+// returns a function
+export const validateBody =
+  (schema: ZodType<any>): RequestHandler =>
+  (req, res, next) => {
+    const result = schema.safeParse(req.body);
+
+    if (!result.success) {
+      return next(new ValidationError(result.error.issues)); // error case
+    }
+
+    next();
+  };
+
+export const createUser = validateBody(schemas.User);
+export const updateUser = validateBody(schemas.UserUpdate);
+
+export const createPost = validateBody(schemas.Post);
+export const updatePost = [validateParamId, validateBody(schemas.PostUpdate)];
