@@ -10,7 +10,7 @@ export const getPosts: RequestHandler = async (req, res) => {
 
 export const createPost: RequestHandler = async (req, res) => {
   const body = req.body;
-  body.userId = req.user.userId;
+  body.userId = req.user.id;
   const post = await prisma.post.create({
     data: body,
   });
@@ -51,7 +51,7 @@ export const deletePost: RequestHandler = async (req, res) => {
 
 export const createLike: RequestHandler = async (req, res) => {
   const postId = Number.parseInt(req.params.id);
-  const userId = req.user.userId;
+  const userId = req.user.id;
 
   console.log(userId);
 
@@ -72,7 +72,7 @@ export const createLike: RequestHandler = async (req, res) => {
 };
 
 export const deleteLike: RequestHandler = async (req, res) => {
-  const userId = req.user.userId;
+  const userId = req.user.id;
   const postId = parseInt(req.params.id);
   const post = await prisma.post.update({
     where: {
@@ -94,7 +94,7 @@ export const deleteLike: RequestHandler = async (req, res) => {
 
 export const createFollow: RequestHandler = async (req, res) => {
   const postId = Number.parseInt(req.params.id);
-  const userId = req.user.userId;
+  const userId = req.user.id;
 
   console.log(userId);
 
@@ -115,7 +115,7 @@ export const createFollow: RequestHandler = async (req, res) => {
 };
 
 export const deleteFollow: RequestHandler = async (req, res) => {
-  const userId = req.user.userId;
+  const userId = req.user.id;
   const postId = parseInt(req.params.id);
   const post = await prisma.post.update({
     where: {
@@ -155,7 +155,7 @@ export const getReplies: RequestHandler = async (req, res, next) => {
 export const createReply: RequestHandler = async (req, res) => {
   const postId = parseInt(req.body.id);
   const body = req.body;
-  body.userId = req.user.userId;
+  body.userId = req.user.id;
 
   const reply = await prisma.reply.create({
     data: body,

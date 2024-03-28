@@ -1,7 +1,12 @@
 // describes user controller
-import express, { NextFunction, Request, Response } from "express";
+import express, {
+  NextFunction,
+  Request,
+  RequestHandler,
+  Response,
+} from "express";
 import prisma from "../prisma.js";
-import { RequestHandler } from "express-serve-static-core";
+import bcrypt from "bcrypt";
 
 export const getUsers: RequestHandler = async (req, res) => {
   const users = await prisma.user.findMany();
@@ -9,9 +14,15 @@ export const getUsers: RequestHandler = async (req, res) => {
 };
 
 export const createUser: RequestHandler = async (req, res) => {
-  const user = await prisma.user.create({
-    data: req.body,
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+  console.log(hashedPassword);
+  const userDb = await prisma.user.create({
+    data: { ...req.body, password: hashedPassword },
   });
+
+  const { password, ...user } = userDb;
+
   res.status(201).json({ user });
 };
 
@@ -32,7 +43,8 @@ export const getUser: RequestHandler = async (req, res, next) => {
 };
 
 export const updateUser: RequestHandler = async (req, res, next) => {
-  const userId = req.user.userId;
+  const userId = req.user.id;
+  console.log("from updateUser", req.user);
   const user = await prisma.user.update({
     where: { id: userId },
     data: req.body,
@@ -41,12 +53,12 @@ export const updateUser: RequestHandler = async (req, res, next) => {
   if (!user) {
     return next(new Error("404"));
   }
-  console.log("user updated");
+  console.log("user updated successfully");
   res.json(user);
 };
 
 export const deleteUser: RequestHandler = async (req, res) => {
-  const userId = req.user.userId;
+  const userId = req.user.id;
   const result = await prisma.user.delete({
     where: { id: userId },
   });
