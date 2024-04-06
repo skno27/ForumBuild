@@ -19,6 +19,7 @@ model User {
   username String  @unique
   name     String
   verified Boolean @default(true)
+  roles    Roles[]
 
   notificationSettings NotificationSettings[]
   posts                Post[]
@@ -32,13 +33,17 @@ model Password {
   id     Int    @id @default(autoincrement())
   userId Int    @unique
   hash   String
-  user   User   @relation(fields: userId, references: id)
+  user   User   @relation(fields: userId, references: id, onDelete: Cascade)
 }
 
 enum NotificationSettings {
   SECURITY
   MARKETING
   POSTS
+}
+
+enum Roles {
+  ADMIN
 }
 
 model Post {

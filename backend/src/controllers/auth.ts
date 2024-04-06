@@ -33,9 +33,13 @@ export const login: RequestHandler = async (req, res) => {
   }
   console.log("Logging In");
 
-  const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, {
-    expiresIn: "6h",
-  });
+  const token = jwt.sign(
+    { id: user.id, username: user.username, roles: user.roles },
+    JWT_SECRET,
+    {
+      expiresIn: "6h",
+    }
+  );
   res.json({ token });
 };
 
