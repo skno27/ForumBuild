@@ -5,7 +5,6 @@ import * as validation from "../middleware/validation.js";
 const router = express.Router();
 
 router.get("/", usersController.getUsers);
-router.post("/", validation.createUser, usersController.createUser);
 
 router.get("/:id", usersController.getUser);
 router.patch("/", validation.updateUser, usersController.updateUser);

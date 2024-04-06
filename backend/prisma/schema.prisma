@@ -19,13 +19,20 @@ model User {
   username String  @unique
   name     String
   verified Boolean @default(true)
-  password String
 
   notificationSettings NotificationSettings[]
   posts                Post[]
   postsLiked           Post[]                 @relation("PostLikes")
   postsFollowed        Post[]                 @relation("PostFollows")
-  userComments         Reply[]
+  replies              Reply[]
+  password             Password?
+}
+
+model Password {
+  id     Int    @id @default(autoincrement())
+  userId Int    @unique
+  hash   String
+  user   User   @relation(fields: userId, references: id)
 }
 
 enum NotificationSettings {
