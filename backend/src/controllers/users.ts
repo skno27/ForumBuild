@@ -29,6 +29,8 @@ export const getUser: RequestHandler = async (req, res, next) => {
 
 export const updateUser: RequestHandler = async (req, res, next) => {
   const userId = req.user.id;
+  // double protection to make sure user isnt assigning itself new roles
+  delete req.body.roles;
   console.log("from updateUser", req.user);
   const user = await prisma.user.update({
     where: { id: userId },
@@ -41,6 +43,17 @@ export const updateUser: RequestHandler = async (req, res, next) => {
   console.log("user updated successfully");
   res.json(user);
 };
+
+// export const updateUserPassword: RequestHandler = async (req, res, next) => {
+//   const userId = req.user.id;
+//   const update = await prisma.user.update({
+//     where: { id: userId },
+//     data: {
+//       password: req.body.password,
+//     },
+//   });
+//   console.log
+// };
 
 export const deleteUser: RequestHandler = async (req, res) => {
   const userId = req.user.id;

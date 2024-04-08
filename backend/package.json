@@ -7,8 +7,10 @@
   "scripts": {
     "build": "tsc -w",
     "start": "node dist/app.js",
-    "dev": "nodemon --files --ext ts,js,json --exec 'node --no-warnings --loader ts-node/esm src/app.ts'",
-    "seed": "tsc && node dist/seed.js"
+    "dev": "nodemon --files --ext ts,js,json --exec 'node --no-warnings --loader ts-node/esm src/app.ts'"
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm src/seed.ts"
   },
   "keywords": [],
   "author": "",

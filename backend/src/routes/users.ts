@@ -9,6 +9,7 @@ router.get("/", usersController.getUsers);
 
 router.get("/:id", usersController.getUser);
 router.patch("/", validation.updateUser, usersController.updateUser);
+// router.patch("/", usersController.updateUserPassword);
 router.delete("/", usersController.deleteUser);
 router.delete("/:id", isAdmin, usersController.adminDeleteUser);
 

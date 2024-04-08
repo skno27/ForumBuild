@@ -14,7 +14,7 @@ export const User = z.object({
   username: z.string().min(5, "at least 5 chars").max(50, "at most 50 chars"),
   password: z.string(),
   verified: z.boolean().optional(),
-  Roles: z.nativeEnum(Roles).array().optional(),
+  roles: z.nativeEnum(Roles).array().optional(),
   notificationSettings: z.nativeEnum(NotificationSettings).array().optional(),
   posts: z.array(postLazy).optional(),
   postsLike: z.array(postLazy).optional(),
@@ -57,7 +57,11 @@ export const Login = User.pick({
   })
   .strict();
 
-export const UserUpdate = User.partial();
+export const UserUpdate = User.partial()
+  .omit({
+    roles: true,
+  })
+  .strict();
 
 // Post Schema
 export const Post = z.object({
