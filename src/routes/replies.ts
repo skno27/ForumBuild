@@ -1,5 +1,5 @@
 import express from "express";
-import * as repliesController from "./../controllers/replies.js";
+import * as repliesController from "../controllers/replies.js";
 import * as validation from "../middleware/validation.js";
 
 const router = express.Router();
