@@ -5,3 +5,5 @@ deprecated
 dist
 backend/prisma/migrations
 backend/Archive.zip
+
+.DS_Store
