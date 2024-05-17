@@ -4,3 +4,4 @@ node_modules
 deprecated
 dist
 backend/prisma/migrations
+backend/Archive.zip
