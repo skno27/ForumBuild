@@ -1,5 +1,6 @@
 import z from "zod";
-import { NotificationSettings, Roles } from "@prisma/client";
+import pr from "@prisma/client";
+const { NotificationSettings, Roles } = pr;
 import { title } from "process";
 
 const userLazy: z.ZodLazy<any> = z.lazy(() => User);

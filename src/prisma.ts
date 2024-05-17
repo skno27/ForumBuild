@@ -1,4 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import pr from "@prisma/client";
+const { Prisma, PrismaClient } = pr;
 
 let prisma = new PrismaClient();
 
