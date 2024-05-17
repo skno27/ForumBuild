@@ -10,7 +10,7 @@ import notFound from "./middleware/notFound.js";
 import authenticated from "./middleware/loginAuth.js";
 
 const app = express();
-const port = 8080;
+const port = 80;
 
 app.use(express.json());
 app.use(xss);
